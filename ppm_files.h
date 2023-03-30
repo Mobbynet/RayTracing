@@ -5,12 +5,9 @@
 #ifndef RAYTRACINGINONEWEEK_PPM_FILES_H
 #define RAYTRACINGINONEWEEK_PPM_FILES_H
 
-#include <iostream>
-#include <fstream>
+#include "constants.h"
 
-#include "vec3.h"
 
-const int color_range = 255;
 
 
 

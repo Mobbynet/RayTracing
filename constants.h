@@ -13,12 +13,22 @@
 #include <iostream>
 #include <fstream>
 #include <random>
-
+#include <algorithm>
 
 // Constants
 
 const double infinity = std::numeric_limits<double>::infinity();
 const double pi = 3.1415926535897932385;
+
+//Antialiasing options
+const bool antialiasing = true;
+const auto samples_per_pixel = 100;
+//
+
+
+const int color_range = 255;
+
+
 
 
 //utility functions
@@ -31,7 +41,16 @@ inline double random_double() {
     static std::mt19937 generator;
     return distribution(generator);
 }
+
+
+
+
 //common headers
+
+
+
+
+
 
 #include "ray.h"
 #include "vec3.h"

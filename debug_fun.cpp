@@ -87,12 +87,15 @@ bool testSphere(){
     //render(there will be a function for it)
     for (int h = 0; h < image_height; ++h) {
         for(int w = 0; w < image_width; ++w){
-            auto u = double(w) / (image_width-1);
-            auto v = double(h) / (image_height-1);
+            color pixel_color(0,0,0);
+            for(int i = 0;i < samples_per_pixel; i ++){
+            auto u = double(w + random_double()) / (image_width-1);
+            auto v = double(h + random_double()) / (image_height-1);
             ray r = m_camera.get_ray(u,v);
-            color pixel_color = ray_color_sphere(r,world);
+            pixel_color += ray_color_sphere(r,world);
+                }
             sphere_test.writeRGBToPos(pixel_color.x(),pixel_color.y(),pixel_color.z(),h,w);
-        }
+            }
     }
     sphere_test.saveFile("Testing hittable list aka world by creating spheres and coloring them with weird function taken from the book");
     return 0;

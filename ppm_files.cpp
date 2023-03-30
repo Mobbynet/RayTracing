@@ -3,7 +3,9 @@
 //
 
 #include "ppm_files.h"
-#include "vec3.h"
+
+
+
 
 
 
@@ -87,26 +89,37 @@ bool ppm_file::checkTheColor(double color) {
 
 bool ppm_file::writeRGBToPos(double red,double green,double blue, int row, int col) { //Red green blue is a number bettwen 1 and 0
     if(!isInImage(row,col)){                                                           // it can be changed later but for now I'm doing it this way
-        std::cerr << "\nPosition "<< row << " " << col << " is out of an image!\n";
+        std::cerr << "Position "<< row << " " << col << " is out of an image!\n";
         return false;
     }
-    if(!checkTheColor(red)){
-        std::cerr << "\nRed is out of range" << "on position " << row << " " << col << std::endl;
-        return false;
-    }
-
-    if(!checkTheColor(green)){
-        std::cerr << "\nGreen is out of range" << "on position " << row << " " << col << std::endl;
+    if(!checkTheColor(red && not antialiasing)){
+        std::cerr << "Red is out of range " << red << " on position " << row << " " << col << std::endl;
         return false;
     }
 
-    if(!checkTheColor(blue)){
-        std::cerr << "\nBlue is out of range" << "on position " << row << " " << col << std::endl;
+    if(!checkTheColor(green) && not antialiasing){
+        std::cerr << "Green is out of range " << green << " on position " << row << " " << col << std::endl;
         return false;
     }
+
+    if(!checkTheColor(blue) && not antialiasing){
+        std::cerr << "Blue is out of range " << blue << " on position " << row << " " << col << std::endl;
+        return false;
+    }
+    if(antialiasing){
+        auto scale = 1.0 / samples_per_pixel;
+        red *= scale;
+        green *= scale;
+        blue *= scale;
+        red = std::clamp(red,0.0,0.999);
+        green = std::clamp(green,0.0,0.999);
+        blue = std::clamp(blue,0.0,0.999);
+    }
+
     image[row][col].modX(static_cast<int>(color_range*red));
     image[row][col].modY(static_cast<int>(color_range*green));
     image[row][col].modZ(static_cast<int>(color_range*blue));
+
     return 0;
 }
 
