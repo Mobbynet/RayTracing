@@ -53,7 +53,15 @@ double vec3::length_squared() const {
     return e[0]*e[0] + e[1]*e[1] + e[2]*e[2];
 }
 
-
+bool vec3::modX(double x){
+    e[0] = x;
+}
+bool vec3::modY(double y){
+    e[1] = y;
+}
+bool vec3::modZ(double z){
+    e[2] = z;
+}
 
 
 

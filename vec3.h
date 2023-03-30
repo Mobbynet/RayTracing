@@ -8,10 +8,16 @@
 #include <cmath>
 #include <iostream>
 
-class vec3 {
 
+
+class vec3 {
+private:
+    double e[3];
+    friend class ppm_file;
+    bool modX(double x);
+    bool modY(double y);
+    bool modZ(double z);
     public:
-        double e[3];
         vec3() : e{0,0,0} {}
         vec3(double e0, double e1, double e2) : e{e0,e1,e2}{}
 
@@ -19,9 +25,12 @@ class vec3 {
         double y() const;
         double z() const;
 
+
+
         vec3 operator-() const;
         double operator[](int i) const;
         double& operator[](int i);
+
 
     vec3& operator+=(const vec3 &v);
 
@@ -40,23 +49,23 @@ using color = vec3;
 
 //utility functions
 inline std::ostream& operator<<(std::ostream &out,const vec3 &v){
-    return out << v.e[0] << ' ' << v.e[1] << ' ' << v.e[2];
+    return out << v.x() << ' ' << v.y() << ' ' << v.z();
 }
 
 inline vec3 operator+(const vec3 &u, const vec3 &v){
-    return vec3(u.e[0] + v.e[0],u.e[1] + v.e[1],u.e[2]+v.e[2]);
+    return vec3(u.x() + v.x(),u.y() + v.y(),u.z()+v.z());
 }
 
 inline vec3 operator-(const vec3 &u, const vec3 &v){
-    return vec3(u.e[0] - v.e[0],u.e[1] - v.e[1],u.e[2]-v.e[2]);
+    return vec3(u.x() - v.x(),u.y() - v.y(),u.z()-v.z());
 }
 
 inline vec3 operator*(const vec3 &u, const vec3 &v){
-    return vec3(u.e[0] * v.e[0],u.e[1] * v.e[1],u.e[2]*v.e[2]);
+    return vec3(u.x() * v.x(),u.y() * v.y(),u.z()*v.z());
 }
 
 inline vec3 operator*(double t, const vec3 &v){
-    return vec3(t * v.e[0],t * v.e[1],t*v.e[2]);
+    return vec3(t * v.x(),t * v.y(),t*v.z());
 }
 
 inline vec3 operator*(const vec3 &u, double t){
@@ -68,15 +77,15 @@ inline vec3 operator/(const vec3 &v,double t){
 }
 
 inline double dot(const vec3 &u, const vec3 &v){
-    return u.e[0] * v.e[0]
-           + u.e[1] * v.e[1]
-           + u.e[2] * v.e[2];
+    return u.x() * v.x()
+           + u.y() * v.y()
+           + u.z() * v.z();
 }
 
 inline vec3 cross(const vec3 &u, const vec3 &v){
-    return vec3(u.e[1] * v.e[2] - u.e[2] * v.e[1],
-                u.e[2] * v.e[0] - u.e[0] * v.e[2],
-                u.e[0] * v.e[1] - u.e[1] * v.e[0]);
+    return vec3(u.y() * v.z() - u.z() * v.y(),
+                u.z() * v.x() - u.x() * v.z(),
+                u.x() * v.y() - u.y() * v.x());
 }
 
 inline vec3 unit_vector(vec3 v){

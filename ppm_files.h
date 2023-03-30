@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
 
 #include "vec3.h"
 
@@ -26,6 +25,7 @@ public:
 
     int getHeight() const;
     int getWidth() const;
+
 private:
     color **image;
     std::string name;

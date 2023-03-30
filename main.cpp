@@ -11,10 +11,15 @@
 
 int main() {
     ppm_file debug;
-    debug.saveFile();
-    testRays();
-    testSphere();
+    if(debug.saveFile())
+        return 1;
+    if(testRays())
+        return 2;
+    if(testSphere())
+        return 3;
 
+
+    return 0;
 }
 
 

@@ -29,7 +29,7 @@ public:
 
 bool testRays();
 
-bool hit_Sphere(const point3& center, double radius,const ray& ray);
+double hit_Sphere(const point3& center, double radius,const ray& ray);
 
 bool testSphere();
 #endif //RAYTRACINGINONEWEEK_RAY_H

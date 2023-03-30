@@ -3,7 +3,7 @@
 //
 
 #include "ppm_files.h"
-
+#include "vec3.h"
 
 
 
@@ -18,12 +18,12 @@ bool ppm_file::createDebugPPMImg() {
             int ir = static_cast<int>(color_range * r);
             int ig = static_cast<int>(color_range * g);
             int ib = static_cast<int>(color_range * b);
-            image[h][w].e[0] = ir;
-            image[h][w].e[1] = ig;
-            image[h][w].e[2] = ib;
+            image[h][w].modX(ir);
+            image[h][w].modY(ig);
+            image[h][w].modZ(ib);
         }
     }
-    return true;
+    return 0;
 }
 
 ppm_file::ppm_file() {
@@ -66,13 +66,13 @@ bool ppm_file::saveFile(std::string comment) {
     file << color_range << std::endl;
     for(int h = 0; h < height; h++){
         for (int w = 0; w < width; w++) {
-            file << image[h][w].e[0] << " " << image[h][w].e[2] << " "  << image[h][w].e[1] << " ";
+            file << image[h][w].x() << " " << image[h][w].y() << " "  << image[h][w].z() << " ";
         }
         file << std::endl;
     }
     file.close();
     std:: cerr << name <<" saved successfuly.\n";
-    return true;
+    return 0;
 }
 
 
@@ -103,10 +103,10 @@ bool ppm_file::writeRGBToPos(double red,double green,double blue, int row, int c
         std::cerr << "\nBlue is out of range" << "on position " << row << " " << col << std::endl;
         return false;
     }
-    image[row][col].e[0] = static_cast<int>(color_range*red);
-    image[row][col].e[1] = static_cast<int>(color_range*green);
-    image[row][col].e[2] = static_cast<int>(color_range*blue);
-    return true;
+    image[row][col].modX(static_cast<int>(color_range*red));
+    image[row][col].modY(static_cast<int>(color_range*green));
+    image[row][col].modZ(static_cast<int>(color_range*blue));
+    return 0;
 }
 
 int ppm_file::getHeight() const{
