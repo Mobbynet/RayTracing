@@ -18,7 +18,7 @@ bool testRays(){
     //img
     const double aspect_ratio = 16.0 / 9.0;
     const int image_width = 400;
-    const int image_height = static_cast<int>(image_width/aspect_ratio);
+    const int image_height = static_cast<int>(image_width * aspect_ratio);
     ppm_file ray_test("debug_ray_test_file",image_width,image_height);
 
     //camera
@@ -66,7 +66,7 @@ bool hit_sphere(const point3& center, double radius,const ray& ray){
     double delta = b*b - 4*a*c;
     return (delta > 0);
     //this whole thing could've been a one return bool, but it is clearer that way
-}
+}   //I may change this in the future cause it takes a lot of time to do it
 
 color ray_color_sphere(const ray& r) {
     if (hit_sphere(point3(0,0,-2), 0.3, r)) //center of sphere is 0,0,-1 and radius 0.5
@@ -79,14 +79,14 @@ color ray_color_sphere(const ray& r) {
 
 bool testSphere(){
     //img
-    const double aspect_ratio = 9.0 / 9.0;
+    const double aspect_ratio = 16.0 / 9.0;
     const int image_width = 900;
     const int image_height = static_cast<int>(image_width/aspect_ratio);
     ppm_file ray_test("debug_sphere_test_file",image_width,image_height);
 
     //camera
     const int viewport_height = 2;
-    const int viewport_width = static_cast<int>(viewport_height/aspect_ratio);
+    const int viewport_width = static_cast<int>(viewport_height * aspect_ratio);
 
     const double distance_between_plane = 1.0; //focal_length
 
