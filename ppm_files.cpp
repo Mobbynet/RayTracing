@@ -23,6 +23,7 @@ bool ppm_file::createDebugPPMImg() {
             image[h][w].modZ(ib);
         }
     }
+    std::cerr << std::endl;
     return 0;
 }
 
@@ -34,11 +35,11 @@ ppm_file::ppm_file() {
         image[h] = new color[width];
     }
     name = "debug_ppm_test_file.ppm";
-    if(createDebugPPMImg()) {
-        std::cerr << "\nDone generating PPM debug object.\n";
-    }
-    else //this code is now unreachable but it might change in future so I will leave it for now
+    if(createDebugPPMImg())
         std::cerr << "\nError while generating PPM debug object!\n";
+
+
+
 }
 
 ppm_file::ppm_file(std::string name,int width,int height){

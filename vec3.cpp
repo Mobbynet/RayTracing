@@ -1,9 +1,7 @@
 //
-// Created by grzes on 29.03.2023.
+// Created by grzes on 30.03.2023.
 //
-
 #include "vec3.h"
-
 
 double vec3::x() const {return e[0];}
 double vec3::y() const {return e[1];}
@@ -62,12 +60,3 @@ bool vec3::modY(double y){
 bool vec3::modZ(double z){
     e[2] = z;
 }
-
-
-
-
-
-
-
-
-

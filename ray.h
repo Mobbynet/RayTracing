@@ -6,9 +6,7 @@
 #define RAYTRACINGINONEWEEK_RAY_H
 
 #include "vec3.h"
-
 #include "ppm_files.h"
-
 
 
 class ray { //ray is defined as vector of A + tb = ray which defines a line
@@ -27,9 +25,8 @@ public:
     }
 };
 
-bool testRays();
 
-double hit_Sphere(const point3& center, double radius,const ray& ray);
 
-bool testSphere();
+
+
 #endif //RAYTRACINGINONEWEEK_RAY_H
