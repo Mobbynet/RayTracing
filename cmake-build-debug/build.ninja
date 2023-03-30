@@ -85,6 +85,12 @@ build CMakeFiles/RayTracingInOneWeek.dir/vec3.cpp.obj: CXX_COMPILER__RayTracingI
   OBJECT_DIR = CMakeFiles\RayTracingInOneWeek.dir
   OBJECT_FILE_DIR = CMakeFiles\RayTracingInOneWeek.dir
 
+build CMakeFiles/RayTracingInOneWeek.dir/camera.cpp.obj: CXX_COMPILER__RayTracingInOneWeek_Debug C$:/Users/grzes/CLionProjects/RayTracingInOneWeek/camera.cpp || cmake_object_order_depends_target_RayTracingInOneWeek
+  DEP_FILE = CMakeFiles\RayTracingInOneWeek.dir\camera.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\RayTracingInOneWeek.dir
+  OBJECT_FILE_DIR = CMakeFiles\RayTracingInOneWeek.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target RayTracingInOneWeek
@@ -93,7 +99,7 @@ build CMakeFiles/RayTracingInOneWeek.dir/vec3.cpp.obj: CXX_COMPILER__RayTracingI
 #############################################
 # Link the executable RayTracingInOneWeek.exe
 
-build RayTracingInOneWeek.exe: CXX_EXECUTABLE_LINKER__RayTracingInOneWeek_Debug CMakeFiles/RayTracingInOneWeek.dir/main.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/ppm_files.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/hittable.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/objects.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/debug_fun.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/vec3.cpp.obj
+build RayTracingInOneWeek.exe: CXX_EXECUTABLE_LINKER__RayTracingInOneWeek_Debug CMakeFiles/RayTracingInOneWeek.dir/main.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/ppm_files.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/hittable.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/objects.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/debug_fun.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/vec3.cpp.obj CMakeFiles/RayTracingInOneWeek.dir/camera.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\RayTracingInOneWeek.dir

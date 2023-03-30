@@ -5,7 +5,7 @@
 
 
 #include "debug_fun.h"
-
+#include "camera.h"
 
 
 
@@ -79,15 +79,7 @@ bool testSphere(){
     world.add(std::make_shared<sphere>(point3(0,-1.5,-1), 10));
 
     //camera
-    const int viewport_height = 2;
-    const int viewport_width = static_cast<int>(viewport_height*aspect_ratio);
-
-    const double distance_between_plane = 1.0; //focal_length
-
-    point3 origin = point3(0,0,0);
-    vec3 horizontal = vec3(viewport_width,0,0);
-    vec3 vertical = vec3(0,viewport_height,0);
-    vec3 lower_left_corner = origin - horizontal/2 - vertical/2 - vec3(0, 0, distance_between_plane);
+    camera m_camera;
 
     //ppm file
 
@@ -97,7 +89,7 @@ bool testSphere(){
         for(int w = 0; w < image_width; ++w){
             auto u = double(w) / (image_width-1);
             auto v = double(h) / (image_height-1);
-            ray r(origin,lower_left_corner + u*horizontal + v*vertical - origin);
+            ray r = m_camera.get_ray(u,v);
             color pixel_color = ray_color_sphere(r,world);
             sphere_test.writeRGBToPos(pixel_color.x(),pixel_color.y(),pixel_color.z(),h,w);
         }
