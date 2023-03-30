@@ -11,7 +11,7 @@
 
 bool ppm_file::createDebugPPMImg() {
     for(int h = 0; h < height; h++){
-        std::cerr << "\rScanlines remaining: " << height - h << ' ' << std::flush;
+
         for(int w = 0; w < width; w++) {
 
             double r = double(w) / (width - 1); //filling with colors taken from book RayTracingInOneWeekend
@@ -26,7 +26,7 @@ bool ppm_file::createDebugPPMImg() {
         }
     }
     std::cerr << std::endl;
-    return 0;
+    return false;
 }
 
 ppm_file::ppm_file() {
@@ -79,38 +79,38 @@ bool ppm_file::saveFile(std::string comment) {
 }
 
 
-bool ppm_file::isInImage(int row,int col){
+bool ppm_file::isInImage(int row,int col) const{
     return (row >= 0 && col >= 0 && row < height && col < width);
 }
 
-bool ppm_file::checkTheColor(double color) {
+bool ppm_file::checkTheColor(double color) const{
     return (color >= 0 && color <= 1 );
 }
 
 bool ppm_file::writeRGBToPos(double red,double green,double blue, int row, int col) { //Red green blue is a number bettwen 1 and 0
     if(!isInImage(row,col)){                                                           // it can be changed later but for now I'm doing it this way
         std::cerr << "Position "<< row << " " << col << " is out of an image!\n";
-        return false;
+        return 1;
     }
-    if(!checkTheColor(red && not antialiasing)){
+    if(!checkTheColor(red) && not antialiasing){
         std::cerr << "Red is out of range " << red << " on position " << row << " " << col << std::endl;
-        return false;
+        return 1;
     }
 
     if(!checkTheColor(green) && not antialiasing){
         std::cerr << "Green is out of range " << green << " on position " << row << " " << col << std::endl;
-        return false;
+        return 1;
     }
 
     if(!checkTheColor(blue) && not antialiasing){
         std::cerr << "Blue is out of range " << blue << " on position " << row << " " << col << std::endl;
-        return false;
+        return 1;
     }
     if(antialiasing){
         auto scale = 1.0 / samples_per_pixel;
-        red *= scale;
-        green *= scale;
-        blue *= scale;
+        red = sqrt(scale*red); //sqrt for gamma correction of 2
+        green = sqrt(scale*green);
+        blue = sqrt(scale*blue);
         red = std::clamp(red,0.0,0.999);
         green = std::clamp(green,0.0,0.999);
         blue = std::clamp(blue,0.0,0.999);

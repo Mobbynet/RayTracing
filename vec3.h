@@ -7,7 +7,7 @@
 
 #include <cmath>
 #include <iostream>
-
+#include <random>
 
 
 class vec3 {
@@ -42,6 +42,9 @@ private:
 
     double length_squared() const;
 
+
+    inline static vec3 random();
+    inline static vec3 random(double min,double max);
 };
 
 using point3 = vec3;
@@ -94,6 +97,9 @@ inline vec3 unit_vector(vec3 v){
 }
 
 
+
+//other functions
+vec3 random_in_unit_sphere();
 
 
 

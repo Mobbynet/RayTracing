@@ -52,10 +52,13 @@ bool testRays() {
     return 0;
 }
 
-color ray_color_sphere(const ray& r, const hittable& world) {
+color ray_color_sphere(const ray& r, const hittable& world,int depth) {
     hit_record rec;
+    if (depth <= 0)
+        return color(0,0,0);
     if (world.hit(r, 0, infinity, rec)) {
-        return 0.5 * (rec.normal + color(1,1,1));
+        point3 target = rec.p + rec.normal + random_in_unit_sphere();
+        return 0.5 * ray_color_sphere(ray(rec.p, target - rec.p), world,depth-1);
     }
     vec3 unit_direction = unit_vector(r.direction());
     auto t = 0.5*(unit_direction.y() + 1.0);
@@ -76,26 +79,29 @@ bool testSphere(){
 
     hittable_list world;
     world.add(std::make_shared<sphere>(point3(0,0,-1),0.5));
-    world.add(std::make_shared<sphere>(point3(0,-1.5,-1), 10));
+    world.add(std::make_shared<sphere>(point3(0,-100.5,-1), 100));
 
     //camera
     camera m_camera;
 
     //ppm file
 
-    ppm_file sphere_test("debug_sphere_test",image_width,image_height);
-    //render(there will be a function for it)
-    for (int h = 0; h < image_height; ++h) {
-        for(int w = 0; w < image_width; ++w){
+    ppm_file sphere_test("debug_sphere_test_file",image_width,image_height);
+    //render(there will be a function for it) or not
+    for (int h = image_height-1; h >= 0; --h) {
+        std::cerr << "\rScanlines remaining: " << h << ' ' << std::flush;
+        for(int w = image_width-1; w >= 0; --w){
             color pixel_color(0,0,0);
             for(int i = 0;i < samples_per_pixel; i ++){
             auto u = double(w + random_double()) / (image_width-1);
             auto v = double(h + random_double()) / (image_height-1);
             ray r = m_camera.get_ray(u,v);
-            pixel_color += ray_color_sphere(r,world);
+            pixel_color += ray_color_sphere(r,world,max_depth);
                 }
-            sphere_test.writeRGBToPos(pixel_color.x(),pixel_color.y(),pixel_color.z(),h,w);
+            if(sphere_test.writeRGBToPos(pixel_color.x(),pixel_color.y(),pixel_color.z(),h,w))
+                return 1;
             }
+        std::cerr << std::endl;
     }
     sphere_test.saveFile("Testing hittable list aka world by creating spheres and coloring them with weird function taken from the book");
     return 0;

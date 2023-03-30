@@ -30,8 +30,8 @@ private:
     int width;
     std::ofstream file;
     bool createDebugPPMImg();
-    bool isInImage(int row,int col);
-    bool checkTheColor(double color);
+    bool isInImage(int row,int col) const;
+    bool checkTheColor(double color) const;
 
 };
 

@@ -23,7 +23,8 @@ const double pi = 3.1415926535897932385;
 //Antialiasing options
 const bool antialiasing = true;
 const auto samples_per_pixel = 100;
-//
+//Diffuse material options
+const int max_depth = 3;
 
 
 const int color_range = 255;
@@ -36,8 +37,8 @@ const int color_range = 255;
 inline double degrees_to_radians(double degrees) {
     return degrees * pi / 180.0;
 }
-inline double random_double() {
-    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+inline double random_double(double min = 0.0, double max = 1.0) {
+    static std::uniform_real_distribution<double> distribution(min, max);
     static std::mt19937 generator;
     return distribution(generator);
 }
@@ -46,10 +47,6 @@ inline double random_double() {
 
 
 //common headers
-
-
-
-
 
 
 #include "ray.h"

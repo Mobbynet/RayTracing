@@ -4,6 +4,8 @@
 #include "objects.h"
 #include "debug_fun.h"
 
+//10X is error for debug test problems
+
 
 
 int main() {

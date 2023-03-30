@@ -9,6 +9,14 @@ double vec3::z() const {return e[2];}
 
 
 
+inline double random_double(double min = 0.0, double max = 1.0) {
+    static std::uniform_real_distribution<double> distribution(min, max);
+    static std::mt19937 generator;
+    return distribution(generator);
+}
+//snatched from constants
+
+
 
 vec3 vec3::operator-() const {
     return vec3(-e[0],-e[1],-e[2]);
@@ -60,3 +68,24 @@ bool vec3::modY(double y){
 bool vec3::modZ(double z){
     e[2] = z;
 }
+
+vec3 vec3::random() {
+    return vec3(random_double(),random_double(),random_double());
+}
+
+vec3 vec3::random(double min, double max) {
+    return vec3(random_double(min,max),random_double(min,max),random_double(min,max));
+}
+
+
+vec3 random_in_unit_sphere() {
+    vec3 p;
+    do{
+        p = vec3::random(-1,1);
+    }while(p.length_squared() >= 1);
+    return p;
+}
+
+
+
+
