@@ -13,6 +13,7 @@ int main() {
     ppm_file debug;
     debug.saveFile();
     testRays();
+    testSphere();
 
 }
 

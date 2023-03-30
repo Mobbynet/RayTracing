@@ -71,7 +71,7 @@ bool ppm_file::saveFile(std::string comment) {
         file << std::endl;
     }
     file.close();
-    std:: cerr << std::endl << name <<" saved successfuly.\n";
+    std:: cerr << name <<" saved successfuly.\n";
     return true;
 }
 
