@@ -79,13 +79,17 @@ vec3 vec3::random(double min, double max) {
 
 
 vec3 random_in_unit_sphere() {
-    vec3 p;
-    do{
-        p = vec3::random(-1,1);
-    }while(p.length_squared() >= 1);
-    return p;
+    while (true) {
+        auto p = vec3::random(-1,1);
+        if (p.length_squared() >= 1) continue;
+        return p;
+    }
 }
 
+
+vec3 random_unit_vec_sphere(){
+    return unit_vector(random_in_unit_sphere());
+}
 
 
 

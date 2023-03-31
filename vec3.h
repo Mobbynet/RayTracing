@@ -101,7 +101,7 @@ inline vec3 unit_vector(vec3 v){
 //other functions
 vec3 random_in_unit_sphere();
 
-
+vec3 random_unit_vec_sphere();
 
 
 #endif //RAYTRACINGINONEWEEK_VEC3_H
