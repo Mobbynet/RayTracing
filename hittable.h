@@ -7,12 +7,14 @@
 
 #include "constants.h"
 
+class material;
 
 
-struct hit_record{
+struct hit_record{ //its a record to help keep data about how ray have hittted an object
     vec3 normal;
     point3 p;
     double t;
+    std::shared_ptr<material> mat_ptr;
     bool front_face;
 
     inline void set_face_normal(const ray& r,const vec3& outward_normal){ //this helps to make that the normal always faces outward of the surfaces
@@ -53,6 +55,11 @@ public:
     virtual bool hit(
             const ray& r, double t_min, double t_max, hit_record& rec) const override;
 };
+
+
+
+
+
 
 
 

@@ -31,6 +31,8 @@ private:
         double operator[](int i) const;
         double& operator[](int i);
 
+        bool near_zero() const;
+
 
     vec3& operator+=(const vec3 &v);
 
@@ -103,5 +105,9 @@ vec3 random_in_unit_sphere();
 
 vec3 random_unit_vec_sphere();
 
+vec3 reflect(const vec3& v, const vec3& n); // reflect vector by normal like high school physics on mirror n -normal
+
+
+vec3 refract(const vec3& uv, const vec3& n, double etai_over_etat);
 
 #endif //RAYTRACINGINONEWEEK_VEC3_H

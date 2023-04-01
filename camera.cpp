@@ -5,10 +5,13 @@
 #include "camera.h"
 
 
-camera::camera(){
-    viewport_height = 2;
-    double aspect_ratio = 16.0/9.0;
-    viewport_width = static_cast<int>(viewport_height*aspect_ratio);
+camera::camera(double vfov, // vertical field of view
+               double aspect_ratio){
+    double theta = degrees_to_radians(vfov);
+    double h = tan(theta/2);
+    double viewport_height = 2 * h;
+    double viewport_width = viewport_height*aspect_ratio;
+
 
     double distance_between_plane = 1.0; //focal_length
 
