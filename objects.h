@@ -9,7 +9,8 @@
 
 /* Class for storing objects and materials */
 
-
+using std::make_shared;
+using std::shared_ptr;
 
 
 
@@ -18,13 +19,13 @@
 class sphere :  public hittable {
     public:
         sphere() {};
-        sphere(point3 center,double radius, std::shared_ptr<material> mat_ptr) : center(center), radius(radius), mat_ptr(mat_ptr){};
+        sphere(point3 center,double radius, shared_ptr<material> mat_ptr) : center(center), radius(radius), mat_ptr(mat_ptr){};
         virtual bool hit(const ray& ray,double t_min, double t_max, hit_record& rec) const override;
 
     private:
         point3 center;
         double radius;
-        std::shared_ptr<material> mat_ptr;
+        shared_ptr<material> mat_ptr;
     };
 
 
@@ -74,5 +75,7 @@ private:
     static double reflectance(double cosine, double ref_idx);
 };
 
+
+hittable_list random_scene();
 
 #endif //RAYTRACINGINONEWEEK_OBJECTS_H

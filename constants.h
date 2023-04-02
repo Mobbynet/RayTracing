@@ -24,13 +24,13 @@ const double pi = 3.1415926535897932385;
 const bool antialiasing = true;
 const auto samples_per_pixel = 100;
 //Diffuse material options
-const int max_depth = 100;
+const int max_depth = 50;
 
 
 const int color_range = 255;
 //img
 const auto aspect_ratio = 16.0/9.0;
-const int image_width = 400;
+const int image_width = 1920;
 const int image_height = static_cast<int>(image_width / aspect_ratio);
 
 

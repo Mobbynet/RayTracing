@@ -8,7 +8,7 @@
 #include "camera.h"
 
 
-
+using std::make_shared;
 
 color ray_color(const ray &r) {
     vec3 unit_direction = unit_vector(r.direction());
@@ -71,30 +71,23 @@ color ray_color_sphere(const ray& r, const hittable& world,int depth) {
 
 
 bool testSphere(){
-    // Img
-
-    const auto aspect_ratio = 16.0 / 9.0;
-
-
-
     //world (hittable list)
 
     //shamelessly stolen from the book
-    auto R = cos(pi/4);
-    hittable_list world;
+    auto world = random_scene();
 
-    auto material_left  = std::make_shared<lambertian>(color(0,0,1));
-    auto material_right = std::make_shared<lambertian>(color(1,0,0));
 
-    world.add(std::make_shared<sphere>(point3(-R, 0, -1), R, material_left));
-    world.add(std::make_shared<sphere>(point3( R, 0, -1), R, material_right));
+    point3 lookfrom(13,2,3);
+    point3 lookat(0,0,0);
+    vec3 vup(0,1,0);
+    auto dist_to_focus = 10.0;
+    auto aperture = 0.1;
 
-    //camera
-    camera m_camera(90,aspect_ratio);
 
+    camera cam(20,lookfrom, lookat, vup,  aspect_ratio, aperture, dist_to_focus);
     //ppm file
 
-    ppm_file sphere_test("debug_sphere_test_file",image_width,image_height);
+    ppm_file sphere_test("debug_sphere_test_file_small",image_width,image_height);
     //render
     for (int h = image_height-1; h >= 0; --h) {
         std::cerr << "\rScanlines remaining: " << h << ' ' << std::flush;
@@ -103,7 +96,7 @@ bool testSphere(){
             for(int i = 0;i < samples_per_pixel; i ++){
             auto u = double(w + random_double()) / (image_width-1);
             auto v = double(h + random_double()) / (image_height-1);
-            ray r = m_camera.get_ray(u,v);
+            ray r = cam.get_ray(u,v);
             pixel_color += ray_color_sphere(r,world,max_depth);
                 }
             if(sphere_test.writeRGBToPos(pixel_color.x(),pixel_color.y(),pixel_color.z(),h,w))

@@ -80,12 +80,15 @@ double vec3::length_squared() const {
 
 bool vec3::modX(double x){
     e[0] = x;
+    return true;
 }
 bool vec3::modY(double y){
     e[1] = y;
+    return true;
 }
 bool vec3::modZ(double z){
     e[2] = z;
+    return true;
 }
 
 vec3 vec3::random() {
@@ -118,6 +121,15 @@ vec3 refract(const vec3& uv, const vec3& n, double etai_over_etat) {
     vec3 r_out_perp =  etai_over_etat * (uv + cos_theta*n);  //R′⊥=η/η′(R+cosθn) //R′⊥=η/η′(R+(−R⋅n)n) we calcualte here this equation
         vec3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * n; //R′∥=−√(1−|R′⊥|^2)n
     return r_out_perp + r_out_parallel; //vector addition //  //R′=R′⊥+R′∥
+}
+
+
+vec3 random_in_unit_disk() {
+    while (true) {
+        vec3 p = vec3(random_double(-1,1), random_double(-1,1), 0);
+        if (p.length_squared() >= 1) continue;
+        return p;
+    }
 }
 
 

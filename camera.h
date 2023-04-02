@@ -13,10 +13,19 @@ private:
     vec3 horizontal;
     vec3 vertical;
     vec3 lower_left_corner;
+    vec3 u, v, w;
+    double lens_radius;
+
+
 public:
-    camera(double vfov, // vertical field of view
-           double aspect_ratio);
-    ray get_ray(double u, double v) const;
+    camera(double vfov,
+           point3 lookfrom,
+           point3 lookat,
+           vec3   vup,// vertical field of view
+           double aspect_ratio,
+    double aperture,
+    double focus_dist);
+    ray get_ray(double s, double t) const;
     point3 getOrigin(){return origin;}
     vec3 getHorizontal(){return horizontal;}
     vec3 getVertical(){return vertical;}
